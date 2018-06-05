@@ -20,20 +20,6 @@ app.use(cookieParser());
 
 // API
 
-app.get('/version', (req, res) => {
-  return fs.readFile('version.txt', 'utf8', (err, version) => {
-    if (err) {
-      res.status(500).send('version file is missing');
-    } else {
-      res.send(`ut-ci-webapp version: ${version}`);
-    }
-  });
-});
-
-app.get('/status', (req, res) => {
-  res.status(200).send('OK');
-});
-
 if (DEV) {
   const multiCompiler = webpack([clientConfig, serverConfig]);
   const clientCompiler = multiCompiler.compilers[0];

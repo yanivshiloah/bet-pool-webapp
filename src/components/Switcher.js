@@ -1,12 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import universal from 'react-universal-component';
-
 import Loading from './Loading';
 import Err from './Error';
 
 const UniversalComponent = universal(({page}) => import(`./${page}`), {
-    minDelay: 500,
+    minDelay: 100,
     loading: Loading,
     error: Err
 });

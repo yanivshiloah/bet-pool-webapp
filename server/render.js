@@ -18,7 +18,7 @@ export default ({clientStats}) => async (req, res) => {
     res.send(`<!doctype html>
       <html>
         <head>        
-          <title>Supply Dashboard</title>
+          <title></title>
           ${styles}
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
           <style>
