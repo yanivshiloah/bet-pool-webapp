@@ -1,11 +1,21 @@
-const fetchData = (path, state, dispatch) => {
-  return fetch(`api/${path}`, {
-    headers: {
-      Accept: 'application/json',
+const getAuthHeader = (token) => {
+    if (token) {
+        return {'Authorization': 'Bearer ' + token};
+    } else {
+        return {};
     }
-  }).then(res => {
-    return res.json();
-  });
+}
+
+const fetchData = async (path, getState) => {
+    const {apiAccessToken, userId} = getState().auth;
+    const res = await fetch(`http://localhost:3000/api/${userId}/${path}`, {
+        headers: {
+            ...getAuthHeader(apiAccessToken),
+            Accept: 'application/json',
+        }
+    });
+    const data = await res.json();
+    return data;
 };
 
 export default fetchData;

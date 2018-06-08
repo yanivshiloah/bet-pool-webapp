@@ -4,12 +4,14 @@ import styles from '../css/Login.css';
 import FacebookLogin from 'react-facebook-login';
 import {Button, Divider, Input} from 'semantic-ui-react';
 import Link from 'redux-first-router-link';
+import {loginUser} from '../actions';
+import {connect} from 'react-redux';
 
-export default class Login extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: 'amit.rotbard@gmail.com',
+            email: 'amit.rotbard@gmail1.com',
             password: 'am053450'
         };
         this.login = this.login.bind(this);
@@ -24,13 +26,7 @@ export default class Login extends Component {
     }
 
     async login() {
-        const res = await fetch('http://localhost:3000/api/auth/login', {
-            body: JSON.stringify(this.state.user),
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'}
-        });
-        const json = await res.json();
-        console.log(json);
+        this.props.dispatch(loginUser(this.state));
     }
 
     render() {
@@ -75,6 +71,8 @@ export default class Login extends Component {
         );
     }
 }
+
+export default connect()(Login);
 
 Login.propTypes = {};
 Login.defaultProps = {};

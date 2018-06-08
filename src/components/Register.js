@@ -10,7 +10,7 @@ export default class Register extends Component {
         this.state = {
             email: '',
             password: '',
-            passwordAgain: '',
+            password2: '',
             firstName: '',
             lastName: ''
         };
@@ -59,7 +59,7 @@ export default class Register extends Component {
                             </div>
                             <div className={styles.loginFormInput}>
                                 <Input icon='lock' iconPosition='left' placeholder='Repeat Password'
-                                       name="passwordAgain"
+                                       name="password2"
                                        onChange={this.onFieldChange}
                                        type="password" value={this.state.passwordAgain} fluid />
                             </div>

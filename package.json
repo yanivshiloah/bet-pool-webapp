@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "babel-polyfill": "6.23.0",
+    "betpool": "^0.1.0",
     "classnames": "^2.2.5",
     "cookie-parser": "1.4.3",
     "express": "4.15.2",
@@ -27,6 +28,7 @@
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "16.0.0",
+    "react-cookies": "^0.1.0",
     "react-dom": "16.0.0",
     "react-facebook-login": "^4.0.1",
     "react-google-login": "^3.2.1",
@@ -38,10 +40,11 @@
     "redux-devtools-extension": "2.13.2",
     "redux-first-router": "1.9.15",
     "redux-first-router-link": "^1.1.4",
+    "redux-thunk": "^2.3.0",
     "reselect": "3.0.1",
     "semantic-ui-react": "^0.79.1",
     "transition-group": "0.0.2",
-    "universal-cookie": "^2.1.2",
+    "universal-cookie": "^2.1.5",
     "webpack-flush-chunks": "1.1.22"
   },
   "devDependencies": {

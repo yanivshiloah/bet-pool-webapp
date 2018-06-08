@@ -7,9 +7,10 @@
 }
 
 .loginHeader {
-    font-size: 160%;
-    color: #000;
-    font-weight: 600;
+    font-size: 200%;
+    color: #EEE;
+    font-weight: 800;
+    text-shadow: 2px 2px #000;
     display: flex;
     justify-content: center;
     align-items: center;

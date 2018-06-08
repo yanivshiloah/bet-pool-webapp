@@ -4,7 +4,7 @@ import configureStore from '../src/configureStore';
 
 export default async (req, res) => {
     const preLoadedState = {
-        auth: {token: req.cookies.token}
+        auth: JSON.parse(req.cookies.betPool)
     };
     const history = createHistory({initialEntries: [req.originalUrl]});
     const {store, thunk} = configureStore(history, preLoadedState);

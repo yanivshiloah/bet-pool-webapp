@@ -9,7 +9,8 @@ const cookies = new Cookies();
 
 export default (state = INITIAL_STATE, action = {}) => {
   switch (action.type) {
-    case 'TOKEN': {
+    case 'USER_LOGGED_IN': {
+      cookies.set('betPool', action.payload);
       return _.assign({}, state, {token: action.payload});
     }
     default:
