@@ -20,6 +20,7 @@ export default {
         thunk: async (dispatch, getState) => {
             const {poolId} = getState().location.payload;
             const bets = await fetchData(`pools/${poolId}/bets`, getState);
+            dispatch({type: 'BETS_RECEIVED', payload: {bets, poolId}});
             console.log(bets);
         }
     },
