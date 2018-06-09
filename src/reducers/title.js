@@ -1,4 +1,4 @@
-export default (state = 'Supply Dashboard', action = {}) => {
+export default (state = '', action = {}) => {
     switch (action.type) {
         default:
             return state;

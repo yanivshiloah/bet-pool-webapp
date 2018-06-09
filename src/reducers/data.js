@@ -1,8 +1,14 @@
 import _ from 'lodash';
-export default (state = {pools: [], bets: {}}, action = {}) => {
+
+const INITIAL_STATE = {pools: [], bets: {}};
+
+export default (state = INITIAL_STATE, action = {}) => {
     switch (action.type) {
+        case 'CLEAR_DATA': {
+            return _.assign({}, state, INITIAL_STATE);
+        }
         case 'POOLS_RECEIVED': {
-            return _.assign({}, state, {pools: state.pools.concat(action.payload.pools)});
+            return _.assign({}, state, {pools: action.payload.pools});
         }
         case 'BETS_RECEIVED': {
             const newBets = _.assign({}, state.bets, {[action.payload.poolId]: action.payload.bets});

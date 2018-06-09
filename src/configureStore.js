@@ -1,6 +1,7 @@
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension/logOnlyInProduction';
 import {connectRoutes} from 'redux-first-router';
+import {loadingBarMiddleware, loadingBarReducer} from 'react-redux-loading-bar';
 import reduxThunk from 'redux-thunk';
 import routesMap from './routesMap';
 import options from './options';
@@ -15,8 +16,12 @@ export default (history, preLoadedState) => {
         routesMap,
         options
     );
-    const rootReducer = combineReducers({...reducers, location: reducer});
-    const middlewares = applyMiddleware(middleware, reduxThunk);
+    const rootReducer = combineReducers({
+        ...reducers,
+        loadingBar: loadingBarReducer,
+        location: reducer
+    });
+    const middlewares = applyMiddleware(middleware, reduxThunk, loadingBarMiddleware());
     const enhancers = composeEnhancers(enhancer, middlewares);
     const store = createStore(rootReducer, preLoadedState, enhancers);
     if (module.hot && process.env.NODE_ENV === 'development') {

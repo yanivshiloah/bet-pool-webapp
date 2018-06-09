@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import styles from '../css/Login.css';
 import FacebookLogin from 'react-facebook-login';
 import {Button, Divider, Input} from 'semantic-ui-react';
+import {register, registerWithFacebookToken} from '../actions';
+import {connect} from 'react-redux';
 
-export default class Register extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,6 +18,7 @@ export default class Register extends Component {
         };
         this.register = this.register.bind(this);
         this.onFieldChange = this.onFieldChange.bind(this);
+        this.facebookResponse = this.facebookResponse.bind(this);
     }
 
     onFieldChange(e) {
@@ -26,24 +29,28 @@ export default class Register extends Component {
     }
 
     async register() {
-        const res = await fetch('http://localhost:3000/api/auth/register', {
-            body: JSON.stringify(this.state),
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'}
-        });
-        const json = await res.json();
-        console.log(json);
+        this.props.dispatch(register(this.state));
+    }
+
+    facebookResponse(response) {
+        this.props.dispatch(registerWithFacebookToken(response));
     }
 
     render() {
-        const {password, passwordAgain, email} = this.state;
-        const isFormDisabled = email.trim() === '' || password.trim() === '' || passwordAgain.trim() === '' ||
-            password !== passwordAgain;
+        const {password, password2, email} = this.state;
+        const isFormDisabled = email.trim() === '' || password.trim() === '' || password2.trim() === '' ||
+            password !== password2;
         return (
             <div className={styles.loginContainer}>
                 <div>
                     <div className={styles.loginBox}>
                         <div>
+                            <FacebookLogin textButton="Register with Facebook"
+                                           appId="476316572540105"
+                                           autoLoad={false}
+                                           fields="name,email,picture,app_name"
+                                           callback={this.facebookResponse}
+                            />
                             <div className={styles.loginFormInput}>
                                 <Input icon='at' iconPosition='left' placeholder='Email'
                                        onChange={this.onFieldChange}
@@ -61,7 +68,7 @@ export default class Register extends Component {
                                 <Input icon='lock' iconPosition='left' placeholder='Repeat Password'
                                        name="password2"
                                        onChange={this.onFieldChange}
-                                       type="password" value={this.state.passwordAgain} fluid />
+                                       type="password" value={this.state.password2} fluid />
                             </div>
                             <div className={styles.loginFormInput}>
                                 <Input placeholder='First Name'
@@ -86,6 +93,8 @@ export default class Register extends Component {
         );
     }
 }
+
+export default connect()(Register);
 
 Register.propTypes = {};
 Register.defaultProps = {};

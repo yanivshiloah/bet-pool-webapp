@@ -4,7 +4,7 @@ import styles from '../css/Login.css';
 import FacebookLogin from 'react-facebook-login';
 import {Button, Divider, Input} from 'semantic-ui-react';
 import Link from 'redux-first-router-link';
-import {loginUser} from '../actions';
+import {loginUser, verifyFacebookToken} from '../actions';
 import {connect} from 'react-redux';
 
 class Login extends Component {
@@ -16,6 +16,7 @@ class Login extends Component {
         };
         this.login = this.login.bind(this);
         this.onFieldChange = this.onFieldChange.bind(this);
+        this.facebookResponse = this.facebookResponse.bind(this);
     }
 
     onFieldChange(e) {
@@ -27,6 +28,10 @@ class Login extends Component {
 
     async login() {
         this.props.dispatch(loginUser(this.state));
+    }
+
+    facebookResponse(response) {
+        this.props.dispatch(verifyFacebookToken(response));
     }
 
     render() {
@@ -42,6 +47,7 @@ class Login extends Component {
                                 <FacebookLogin appId="476316572540105"
                                                autoLoad={false}
                                                fields="name,email,picture,app_name"
+                                               callback={this.facebookResponse}
                                 />
                             </div>
                             <div className={styles.loginFormInput}>

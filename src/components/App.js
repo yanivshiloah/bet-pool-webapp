@@ -3,18 +3,41 @@ import {connect} from 'react-redux';
 import Error from './Error';
 import Switcher from './Switcher';
 import styles from '../css/App.css';
+import {Icon} from 'semantic-ui-react';
+import {logout} from '../actions';
 
-const App = ({error}) => {
-    if (error.size) {
-        return <Error />;
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.logout = this.logout.bind(this);
     }
-    return <div className={styles.app}><Switcher /></div>;
-};
 
-const mapState = ({page, direction, error}) => ({
+    logout() {
+        this.props.dispatch(logout());
+    }
+
+    render() {
+        const {error, auth, isProtected} = this.props;
+        if (error.size) {
+            return <Error />;
+        }
+        return <div className={styles.appContainer}>
+            {isProtected && (<div className={styles.topMenu}>
+                <div>{auth.firstName} {auth.lastName} <Icon name="sign out" onClick={this.logout} /></div>
+            </div>)}
+            <div className={styles.app}>
+                <Switcher />
+            </div>
+        </div>;
+    }
+}
+
+const mapState = ({auth, page, direction, error, location}) => ({
     page,
+    auth,
     direction,
-    error
+    error,
+    isProtected: (location.routesMap[location.type] || {}).protected
 });
 
 export default connect(mapState)(App);
