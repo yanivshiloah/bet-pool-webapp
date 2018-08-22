@@ -1,0 +1,10 @@
+.betContainer {
+    background: rgba(255, 255, 255, .5);
+    min-width: 300px;
+    height: 120px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+}
