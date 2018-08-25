@@ -1,6 +1,46 @@
 .teamContainer {
+    flex: 1 0 calc(100% - 50px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100%;
+    background-color: #fff;
+    position: relative;
+}
+
+.teamContainerClosed {
+    background-color: #000;
+}
+
+.teamContainer > .teamFlag {
+    opacity: .4;
+}
+
+.teamFlag {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: .7;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.teamScore {
+    font-size: 4vh;
+    color: #fff;
+    z-index: 1;
+}
+
+.teamName {
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    text-shadow:
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000,
+            1px 1px 0 #000;
 }

@@ -1,0 +1,27 @@
+.teamBetContainer {
+    flex: 0 0 40%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: stretch;
+    align-items: center;
+}
+
+.teamBetInputWrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 50px;
+    max-width: 50px;
+    border: 0;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.teamBetInput {
+    width: 50%;
+    position: relative;
+    background: transparent;
+    border: 0;
+}
