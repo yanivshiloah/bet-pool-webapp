@@ -8,21 +8,23 @@ import configureStore from './configureStore';
 import App from '../src/components/App';
 
 export default ({clientStats}) => async (req, res) => {
-    const store = await configureStore(req, res);
-    if (!store) return; // no store means redirect was already served
-    const app = createApp(App, store);
-    const appString = ReactDOM.renderToString(app);
-    const stateJson = JSON.stringify(store.getState());
-    const chunkNames = flushChunkNames();
-    const {js, styles, cssHash} = flushChunks(clientStats, {chunkNames});
-    res.send(`<!doctype html>
+  const store = await configureStore(req, res);
+  if (!store) return; // no store means redirect was already served
+  const app = createApp(App, store);
+  const appString = ReactDOM.renderToString(app);
+  const stateJson = JSON.stringify(store.getState());
+  const chunkNames = flushChunkNames();
+  const {js, styles, cssHash} = flushChunks(clientStats, {chunkNames});
+  res.send(`<!doctype html>
       <html>
         <head>        
           <title></title>
           ${styles}
+          <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
           <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
           <style>
             #root {
+                font-family: 'Roboto', sans-serif;
                 width: 100%;
                 height: 100%;
             }  
@@ -39,9 +41,9 @@ export default ({clientStats}) => async (req, res) => {
 };
 
 const createApp = (App, store) => {
-    return (
-        <Provider store={store}>
-            <App />
-        </Provider>
-    );
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 };

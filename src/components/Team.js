@@ -1,14 +1,20 @@
 import React, {Component} from 'react';
+import cx from 'classnames';
 import styles from './../css/Team';
 
 export default class Team extends Component {
   render() {
-    const {team} = this.props;
+    const {team, closed, score} = this.props;
+    const classnames = cx(styles.teamContainer, {
+      [styles.teamContainerClosed]: closed
+    });
     return (
-      <div className={styles.teamContainer}>
-        <div className={styles.teamImage}>
-          <img alt="" width="70" height="40" src={team.flag} />
-        </div>
+      <div className={classnames} data-image-src={team.flag}>
+        <div
+          style={{backgroundImage: `url(${team.flag})`}}
+          className={styles.teamFlag}
+        />
+        <div className={styles.teamScore}>{score}</div>
         <div className={styles.teamName}>{team.name}</div>
       </div>
     );

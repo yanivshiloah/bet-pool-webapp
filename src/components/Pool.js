@@ -8,7 +8,7 @@ class Pool extends Component {
   render() {
     return (
       <div className={styles.betsContainer}>
-        <div>
+        <div className={styles.betsInner}>
           {_.map(this.props.bets, bet => <Bet bet={bet} />)}
         </div>
       </div>
