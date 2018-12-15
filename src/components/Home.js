@@ -1,28 +1,47 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import Link from 'redux-first-router-link';
-import styles from './../css/Home.css';
+import {boundClass} from 'autobind-decorator';
+import {Sidebar, Icon, Menu, Segment} from 'semantic-ui-react';
+import styles from './../css/Home';
+import SinglePoolItem from './SinglePoolItem';
 
-class Home extends Component {
-    render() {
-        return <div className={styles.poolsContainer}>
-            {_.map(this.props.pools, pool => {
-                return <Link to={{type: 'POOL', payload: {poolId: pool._id}}}>
-                    <div className={styles.poolItem}>{pool.name}</div>
-                </Link>;
-            })}
-        </div>;
-    }
+@boundClass
+@connect(state => ({pools: state.data.pools}))
+export default class Home extends Component {
+  render() {
+    return (
+      <Sidebar.Pushable as={Segment}>
+        <Sidebar
+          as={Menu}
+          direction="bottom"
+          animation="overlay"
+          icon="labeled"
+          inverted
+          visible
+          width="thin"
+        >
+          <Menu.Item as="a">
+            <Icon name="home" />
+            Home
+          </Menu.Item>
+          <Menu.Item as="a">
+            <Icon name="gamepad" />
+            Games
+          </Menu.Item>
+          <Menu.Item as="a">
+            <Icon name="camera" />
+            Channels
+          </Menu.Item>
+        </Sidebar>
+
+        <Sidebar.Pusher className={styles.poolsContainer}>
+          <div className={styles.poolsInner}>
+            {_.map(this.props.pools, pool =>
+              <SinglePoolItem key={pool.id} pool={pool} />)}
+          </div>
+        </Sidebar.Pusher>
+      </Sidebar.Pushable>
+    );
+  }
 }
-
-const mapState = (state, ownProps) => {
-    return {
-        pools: state.data.pools
-    }
-}
-
-export default connect(mapState)(Home);
-
-Home.propTypes = {};
-Home.defaultProps = {};

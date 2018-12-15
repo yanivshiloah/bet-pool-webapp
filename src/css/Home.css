@@ -1,26 +1,86 @@
 .poolsContainer {
+    background-image: url('../assets/bg.jpg') !important;
+    background-size: cover !important;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.pool {
+    position: relative;
+    cursor: pointer;
+    border: 1px solid;
+    margin-bottom: 10px;
+    background: #fff;
+    background-position: center;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    padding: 20px;
+    max-width: 700px;
+    height: 110px;
+}
+
+.poolBody {
+    display: flex;
+}
+
+.poolSide {
+    padding: 5px;
+    flex: 1;
+}
+
+.poolImage {
+    width: 64px;
+    height: 64px;
+}
+
+.poolMain {
+    text-align: left;
+    padding-left: 5px;
+    padding-top: 5px;
+    flex: 7;
+    flex-wrap: wrap;
+    display: flex;
+}
+
+.poolMain > div {
     display: flex;
     width: 100%;
-    justify-content: center;
-    align-items: center;
 }
 
-.poolItem {
-    width: 90%;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5);
-    -webkit-box-shadow: 2px 2px 5px 0px rgba(41,0,0,1);
-    -moz-box-shadow: 2px 2px 5px 0px rgba(41,0,0,1);
-    box-shadow: 2px 2px 5px 0px rgba(41,0,0,1);
-    color: #eee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: 800;
-    font-size: 150%;
-    cursor: pointer;
+.poolTitle {
+    font-weight: 600;
+    text-align: left;
+    font-size: 16px;
+    margin-right: 5px;
+    flex: 6;
 }
 
-.poolItem:hover {
-    background: rgba(111, 11, 16, .5);
+.poolBuyIn {
+    font-weight: 600;
+    font-size: 16px;
+    margin-right: 5px;
+    color: indianred;
+    text-align: center;
+}
+
+.poolPlayers {
+    flex: 2;
+}
+
+.poolPot {
+    flex: 3;
+}
+
+.poolFirstPrice {
+    flex: 3;
+}
+
+.poolLastCheckIn {
+    font-size: 8px;
+    width: 72px;
+    line-height: 1;
+    color: cadetblue;
 }

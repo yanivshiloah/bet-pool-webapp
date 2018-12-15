@@ -4,11 +4,12 @@
     "react",
     "stage-2"
   ],
-  
+
   "plugins": [
-    "universal-import"
+    "universal-import",
+    "transform-decorators-legacy"
   ],
-  
+
   "env": {
     "development": {
       "plugins": [

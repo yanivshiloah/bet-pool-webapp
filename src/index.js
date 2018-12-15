@@ -7,26 +7,26 @@ import App from './components/App';
 import configureStore from './configureStore';
 
 const history = createHistory();
-const {store} = configureStore(history, window.REDUX_STATE);
+const {store} = configureStore(window.REDUX_STATE, history);
 
 const render = ContainedApp => {
-    const root = document.getElementById('root');
-    ReactDOM.hydrate(
-        <AppContainer>
-            <Provider store={store}>
-                <ContainedApp />
-            </Provider>
-        </AppContainer>,
-        root
-    );
+  const root = document.getElementById('root');
+  ReactDOM.hydrate(
+    <AppContainer>
+      <Provider store={store}>
+        <ContainedApp />
+      </Provider>
+    </AppContainer>,
+    root
+  );
 };
 
 render(App);
 
 if (module.hot && process.env.NODE_ENV === 'development') {
-    module.hot.accept('./components/App', () => {
+  module.hot.accept('./components/App', () => {
     // eslint-disable-next-line
     const App = require('./components/App').default
-        render(App);
-    });
+    render(App);
+  });
 }
