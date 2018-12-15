@@ -37,7 +37,8 @@ export default class Home extends Component {
 
         <Sidebar.Pusher className={styles.poolsContainer}>
           <div className={styles.poolsInner}>
-            {_.map(this.props.pools, pool => <SinglePoolItem pool={pool} />)}
+            {_.map(this.props.pools, pool =>
+              <SinglePoolItem key={pool.id} pool={pool} />)}
           </div>
         </Sidebar.Pusher>
       </Sidebar.Pushable>
