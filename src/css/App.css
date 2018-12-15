@@ -13,7 +13,7 @@
 }
 
 .appContainer {
-    background-image: url('http://www.bigxsportsradio.com/wp-content/uploads/2014/02/Grass-1000x1000.jpg') !important;
+    background-image: url('../assets/bg.jpg') !important;
     background-size: cover !important;
     width: 100%;
     height: 100%;
