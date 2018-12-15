@@ -3,9 +3,15 @@ export default {
     message: 'Something went wrong...'
   },
   login: {
-    loginButton: 'Login',
+    loginButton: 'Let me in!',
     register: 'register',
-    title: 'Login to your accont',
-    noAccount: 'Don\'t have an account?'
+    title: 'Let the betting begin!',
+    noAccount: 'Wanna join?'
+  },
+  pools: {
+    players: 'Players',
+    pot: 'Pot',
+    firstPrize: 'First Price',
+    deadline: 'Check-in Deadline'
   }
 };

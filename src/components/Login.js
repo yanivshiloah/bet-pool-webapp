@@ -1,24 +1,58 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {Component} from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
+import {boundClass} from 'autobind-decorator';
 import {Button, Divider, Icon, Input} from 'semantic-ui-react';
 import Link from 'redux-first-router-link';
 import {connect} from 'react-redux';
 import GoogleLogin from 'react-google-login';
-
-import styles from '../css/Login';
 import {loginUser, verifyFacebookToken} from '../actions';
 import texts from '../texts';
+import styles from '../css/Login';
 
-class Login extends Component {
+const SOCIAL_IDS = {
+  GOOGLE:
+    '1082876692474-4f1n956n709jtmufln04rjbnl09fqlni.apps.googleusercontent.com',
+  FB: '476316572540105'
+};
+
+const renderFacebookLoginButton = renderProps => {
+  return (
+    <Button
+      fluid
+      size="large"
+      color="facebook plus"
+      className={styles.socialButton}
+      onClick={renderProps.onClick}
+    >
+      <Icon name="facebook" /> Facebook
+    </Button>
+  );
+};
+
+const renderGoogleLoginButton = renderProps => {
+  return (
+    <Button
+      fluid
+      size="large"
+      color="google plus"
+      className={styles.socialButton}
+      onClick={renderProps.onClick}
+    >
+      <Icon name="google" /> Google
+    </Button>
+  );
+};
+
+@connect()
+@boundClass
+export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'amit.rotbard@gmail1.com',
-      password: 'am053450'
+      email: 'yanivshiloah@blabla.com',
+      password: 'redhouse2310'
     };
-    this.login = this.login.bind(this);
-    this.onFieldChange = this.onFieldChange.bind(this);
-    this.facebookResponse = this.facebookResponse.bind(this);
   }
 
   onFieldChange(e) {
@@ -41,40 +75,22 @@ class Login extends Component {
       <div className={styles.loginContainer}>
         <div>
           <div className={styles.loginHeader}>
-            Login to your accont
+            {texts.getText('login', 'title')}
           </div>
           <div className={styles.loginBox}>
             <div className={styles.loginBoxInner}>
-              <div>
+              <div className={styles.loginSocial}>
                 <GoogleLogin
-                  clientId="1082876692474-4f1n956n709jtmufln04rjbnl09fqlni.apps.googleusercontent.com"
+                  clientId={SOCIAL_IDS.GOOGLE}
                   onSuccess={this.googleResponse}
-                  render={renderProps =>
-                    (<Button
-                      fluid
-                      size="large"
-                      color="google plus"
-                      className={styles.socialButton}
-                      onClick={renderProps.onClick}
-                    >
-                      <Icon name="google" /> Google
-                     </Button>)}
+                  render={renderGoogleLoginButton}
                 />
                 <FacebookLogin
-                  appId="476316572540105"
+                  appId={SOCIAL_IDS.FB}
                   autoLoad={false}
                   fields="name,email,picture,app_name"
                   callback={this.facebookResponse}
-                  render={renderProps =>
-                    (<Button
-                      fluid
-                      size="large"
-                      color="facebook plus"
-                      className={styles.socialButton}
-                      onClick={renderProps.onClick}
-                    >
-                      <Icon name="facebook" /> Facebook
-                     </Button>)}
+                  render={renderFacebookLoginButton}
                 />
               </div>
               <div className={styles.loginFormInput}>
@@ -107,7 +123,7 @@ class Login extends Component {
               </div>
               <div>
                 <Divider />
-                <div>
+                <div className={styles.registerContainer}>
                   {texts.getText('login', 'noAccount')}
                   <Link to="/register">
                     {texts.getText('login', 'register')}
@@ -121,8 +137,3 @@ class Login extends Component {
     );
   }
 }
-
-export default connect()(Login);
-
-Login.propTypes = {};
-Login.defaultProps = {};
